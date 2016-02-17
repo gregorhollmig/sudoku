@@ -76,8 +76,8 @@ function generate() {
    row=$1
    col=$2
    if [ $row -gt 8 ];then
-	show
-	echo counter is $counter
+	#show
+	#echo counter is $counter
 	puzzle
 	show
 	exit
@@ -105,20 +105,27 @@ function generate() {
 function show() {
    for row in 0 1 2 3 4 5 6 7 8;do
       if [ $row -eq 0 -o $row -eq 3 -o $row -eq 6 ];then
-         echo '+-----+-----+-----+'
+         echo ' +------+------+------+'
+	  else
+		:
+         #echo ' |------|------|------|'
       fi
       for col in 0 1 2 3 4 5 6 7 8;do
-         if [ $col -eq 0 -o $col -eq 3 -o $col -eq 6 ];then
-            echo -n '|'
-         else
-	    echo -n ' '
+         if [ $col -eq 3 ]; then
+            echo -n ' | '	
+         elif [ $col -eq 6 ]; then
+			echo -n ' |'
+         elif [ $col -eq 0 ]; then
+			echo -n ' |'
+		 else
+		    echo -n ' '
          fi
          echo -n "${grid[$row,$col]}"
       done
       echo '|'
    done
-   echo '+-----+-----+-----+'
+   echo ' +------+------+------+'
 }
 
 init
-generate 0 0 
+generate 0 0
